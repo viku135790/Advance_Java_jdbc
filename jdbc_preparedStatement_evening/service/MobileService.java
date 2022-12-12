@@ -4,6 +4,7 @@ import java.util.List;
 
 import jdbc_preparedStatement_evening.dao.MobileDao;
 import jdbc_preparedStatement_evening.dto.Mobile;
+import jdbc_preparedStatement_evening.exception.IdNotFoundException;
 
 public class MobileService {
 	MobileDao dao=new MobileDao();
@@ -27,7 +28,13 @@ public class MobileService {
 			dao.updateMobile(id, color, price);
 		}
 		else {
-			System.out.println("Id not found");
+			try {
+				throw new IdNotFoundException("Id not found");
+			}
+			catch(Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 	}
